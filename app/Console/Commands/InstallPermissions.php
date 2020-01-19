@@ -42,14 +42,13 @@ class InstallPermissions extends Command
      */
     public function handle()
     {
-
         Artisan::call('uninstall:permissions');
 
         if ($this->option('delete')) {
             $this->info("Delete selected");
             return;
         }
-        $superadmin = Role::create(['name' => 'Super Admin']);
+        Role::create(['name' => 'Super Admin']);
         $admin = Role::create(['name' => 'Admin']);
         $moderator = Role::create(['name' => 'Moderator']);
         $basicuser = Role::create(['name' => 'Basic User']);
@@ -61,22 +60,7 @@ class InstallPermissions extends Command
         Permission::create(['name' => 'Set Server Options'])->syncRoles([$admin]);
         Permission::create(['name' => 'Edit Users'])->syncRoles([$admin]);
         $this->info('Succesfully Installed Permissions!');
-        $user = User::where(['email' => $this->argument('email')])->first();
-        if ($user === null) {
-            $user = User::create([
-                'name' => $this->option('user') ?? 'Admin',
-                'email' => $this->argument('email'),
-                'password' => Hash::make($this->argument('password'))
-            ]);
 
-            $this->info('Succesfully Created Admin User with Email: ' . $user->email);
-
-        }
-
-        if(!$user->hasRole('Super Admin')) {
-            $user->assignRole('Super Admin');
-            $this->info('Assigned Super Admin Role to User with Email: ' .  $user->email);
-        }
         return;
     }
 }

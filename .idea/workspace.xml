@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ccc8090-dc82-49e9-bc6d-90fba877882f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Console/Commands/InstallPermissions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/InstallPermissions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/UninstallPermissions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/UninstallPermissions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/dogs.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dogs.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +193,8 @@
       <workItem from="1579389589875" duration="8680000" />
       <workItem from="1579411573272" duration="84000" />
       <workItem from="1579411670029" duration="5034000" />
-      <workItem from="1579452765190" duration="12564000" />
+      <workItem from="1579452765190" duration="15355000" />
+      <workItem from="1579469748514" duration="1526000" />
     </task>
     <servers />
   </component>
@@ -216,17 +218,17 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="781" y="342" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1579411654618" />
-    <state x="456" y="523" key="com.intellij.ide.util.TipDialog" timestamp="1579452765935">
+    <state x="456" y="523" key="com.intellij.ide.util.TipDialog" timestamp="1579469749131">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="456" y="523" key="com.intellij.ide.util.TipDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1579452765935" />
+    <state x="456" y="523" key="com.intellij.ide.util.TipDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1579469749131" />
     <state x="786" y="309" width="661" height="789" key="find.popup" timestamp="1579409855397">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="786" y="309" width="661" height="789" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1579409855397" />
-    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1579460113549">
+    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1579467609934">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1579460113549" />
+    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1579467609934" />
   </component>
 </project>

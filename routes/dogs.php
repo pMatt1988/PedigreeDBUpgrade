@@ -4,7 +4,7 @@ use App\Http\Controllers\DogController;
 use App\Http\Controllers\PedigreeController;
 
 Route::get('/', [DogController::class, 'index'])->name('dogindex');
-Route::get('create', [DogController::class, 'create'])->name('dogcreate');
+Route::get('create', [DogController::class, 'create'])->name('dogcreate')->middleware(['auth', 'permission:Create Dog']);
 
 Route::get('{id}', [DogController::class, 'show'])->name('dogshow');
 Route::post('/', [DogController::class, 'store'])->name('dogstore');
