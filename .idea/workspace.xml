@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ccc8090-dc82-49e9-bc6d-90fba877882f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/routes/backend.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/dogs.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.phpstorm.meta.php" beforeDir="false" afterPath="$PROJECT_DIR$/.phpstorm.meta.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_ide_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_ide_helper_models.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper_models.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Commands/InstallPermissions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/InstallPermissions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Commands/UninstallPermissions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/UninstallPermissions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -199,7 +192,7 @@
       <workItem from="1579389589875" duration="8680000" />
       <workItem from="1579411573272" duration="84000" />
       <workItem from="1579411670029" duration="5034000" />
-      <workItem from="1579452765190" duration="7886000" />
+      <workItem from="1579452765190" duration="12564000" />
     </task>
     <servers />
   </component>

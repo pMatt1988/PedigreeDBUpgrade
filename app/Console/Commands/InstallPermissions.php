@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -41,8 +42,10 @@ class InstallPermissions extends Command
      */
     public function handle()
     {
-        if($this->option('delete'))
-        {
+
+        Artisan::call('uninstall:permissions');
+
+        if ($this->option('delete')) {
             $this->info("Delete selected");
             return;
         }
@@ -51,20 +54,29 @@ class InstallPermissions extends Command
         $moderator = Role::create(['name' => 'Moderator']);
         $basicuser = Role::create(['name' => 'Basic User']);
 
-        $createdog = Permission::create(['name' => 'Create Dog'])->syncRoles([$admin, $moderator, $basicuser]);
-        $editdog = Permission::create(['name' => 'Edit Dog'])->syncRoles([$admin, $moderator, $basicuser]);
-        $editalldogs = Permission::create(['name' => 'Edit All Dogs'])->syncRoles([$admin, $moderator]);
-        $accessbackend = Permission::create(['name' => 'Access Backend'])->syncRoles([$admin, $moderator]);
-        $setserveroptions = Permission::create(['name' => 'Set Server Options'])->syncRoles([$admin]);
+        Permission::create(['name' => 'Create Dog'])->syncRoles([$admin, $moderator, $basicuser]);
+        Permission::create(['name' => 'Edit Dog'])->syncRoles([$admin, $moderator, $basicuser]);
+        Permission::create(['name' => 'Edit All Dogs'])->syncRoles([$admin, $moderator]);
+        Permission::create(['name' => 'Access Backend'])->syncRoles([$admin, $moderator]);
+        Permission::create(['name' => 'Set Server Options'])->syncRoles([$admin]);
+        Permission::create(['name' => 'Edit Users'])->syncRoles([$admin]);
+        $this->info('Succesfully Installed Permissions!');
+        $user = User::where(['email' => $this->argument('email')])->first();
+        if ($user === null) {
+            $user = User::create([
+                'name' => $this->option('user') ?? 'Admin',
+                'email' => $this->argument('email'),
+                'password' => Hash::make($this->argument('password'))
+            ]);
 
-        $user = User::create([
-            'name' => $this->option('user') ?? 'Admin',
-            'email' => $this->argument('email'),
-            'password' => Hash::make($this->argument('password'))
-        ]);
+            $this->info('Succesfully Created Admin User with Email: ' . $user->email);
 
-        $user->assignRole($superadmin);
+        }
 
+        if(!$user->hasRole('Super Admin')) {
+            $user->assignRole('Super Admin');
+            $this->info('Assigned Super Admin Role to User with Email: ' .  $user->email);
+        }
         return;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -14,14 +15,14 @@ class UninstallPermissions extends Command
      *
      * @var string
      */
-    protected $signature = 'uninstall:permissions {--user=Admin}';
+    protected $signature = 'uninstall:permissions';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Uninstalls Permissions!';
 
     /**
      * Create a new command instance.
@@ -52,12 +53,11 @@ class UninstallPermissions extends Command
         Permission::where('name', 'Edit All Dogs')->delete();
         Permission::where('name', 'Access Backend')->delete();
         Permission::where('name', 'Set Server Options')->delete();
+        Permission::where('name', 'Edit Users')->delete();
 
-        $user = User::whereName($this->option('user') ?? 'Admin')->delete();
+        $this->info("Successfully Uninstalled Permissions");
 
-
-
-
+        return;
 
     }
 }

@@ -25,24 +25,17 @@ Route::get('/', function () {
  * Dog Routes
  */
 Route::prefix('dogs')->group(base_path('routes/dogs.php'));
+Route::group(['prefix' =>'backend','middleware' => ['permission:Access Backend']], base_path('routes/backend.php'));
 
-
-
-
-Route::get('autocomplete/{query}', 'SearchController@result');
-Route::get('autocomplete/{query}/{sex}', 'SearchController@resultsex');
-
-
-
-
+Route::group(['prefix' => 'autocomplete'], function() {
+    Route::get('autocomplete/{query}', 'SearchController@result');
+    Route::get('autocomplete/{query}/{sex}', 'SearchController@resultsex');
+});
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/admin/test', function () {
-    return ('You are a Super Admin');
-})->middleware('role:Super Admin');
 
 
-Route::group(['prefix' =>'backend','middleware' => ['permission:Access Backend']], base_path('routes/backend.php'));
+
