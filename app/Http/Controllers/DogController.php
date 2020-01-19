@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Dog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
@@ -45,7 +46,7 @@ class DogController extends Controller
     {
 
         $validated = $request->validate($this->validationRules());
-        $validated['user_id'] = Auth::id();
+        //$validated['user_id'] = Auth::id();
 
         $dog = Dog::create($validated);
 
