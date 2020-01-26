@@ -2,8 +2,6 @@
 
 @section('content')
     <div class="container">
-        @foreach($users as $user)
-            {{$user->email}}
-        @endforeach
+        {!! $grid !!}
     </div>
 @endsection

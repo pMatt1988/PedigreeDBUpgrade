@@ -50,9 +50,9 @@ class Pedigree
 
         $nGenP2 = pow(2, $nGen);
 
-        $output = '<table> <tr> <td rowspan="' . pow(2, $nGen+1) .'" class="table-light text-dark"> Test Mate</td>';
+        $output = '<table> <tr> <td rowspan="' . pow(2, $nGen + 1) . '" class="table-light text-dark"> Test Mate</td>';
 
-        foreach($parents as $dog) {
+        foreach ($parents as $dog) {
             $color = $dog->sex === 'female' ? 'table-light text-dark' : 'table-primary text-dark';
 
             $pretitle = $dog->pretitle !== null ? '<span class="text-primary">' . $dog->pretitle . '</span> <br>' : null;

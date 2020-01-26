@@ -101,7 +101,7 @@
 
                             @if($dog->color)
                                 <div class="row">
-                                    <div class="col-2 text-right">Color: </div>
+                                    <div class="col-2 text-right">Color:</div>
 
                                     <div class="col">
                                         {{ $dog->color }}
@@ -111,7 +111,7 @@
 
                             @if($dog->markings)
                                 <div class="row">
-                                    <div class="col-2 text-right">Markings: </div>
+                                    <div class="col-2 text-right">Markings:</div>
 
                                     <div class="col">
                                         {{ $dog->markings }}
@@ -121,7 +121,7 @@
 
                             @if($dog->website)
                                 <div class="row">
-                                    <div class="col-2 text-right">Website: </div>
+                                    <div class="col-2 text-right">Website:</div>
 
                                     <div class="col">
                                         {{ $dog->website }}
@@ -131,7 +131,7 @@
 
                             @if($dog->breeder)
                                 <div class="row">
-                                    <div class="col-2 text-right">Breeder: </div>
+                                    <div class="col-2 text-right">Breeder:</div>
 
                                     <div class="col">
                                         {{ $dog->breeder }}
@@ -141,14 +141,13 @@
 
                             @if($dog->owner)
                                 <div class="row">
-                                    <div class="col-2 text-right">Owner: </div>
+                                    <div class="col-2 text-right">Owner:</div>
 
                                     <div class="col">
                                         {{ $dog->owner }}
                                     </div>
                                 </div>
                             @endif
-
 
 
                         </div>
@@ -159,17 +158,17 @@
             <br>
 
 
+            <form method="POST" action="/dogs/{{ $dog->id }}">
+                @csrf
+                @method('DELETE')
 
-                <form method="POST" action="/dogs/{{ $dog->id }}">
-                    @csrf
-                    @method('DELETE')
+                <a href="/dogs/{{ $dog->id }}/pedigree/4" class="btn btn-success">Pedigree</a>
+                @if(Auth::id() == $dog->user_id || Auth::user()->can('Edit All Dogs'))
                     <a href="/dogs/{{ $dog->id }}/edit" class="btn btn-primary">Edit</a>
-                    <a href="/dogs/{{ $dog->id }}/pedigree/4" class="btn btn-success">Pedigree</a>
                     <button type="submit" class="btn btn-danger">Delete</button>
+                @endif
 
-
-                </form>
-
+            </form>
 
 
         </div><!--col-->

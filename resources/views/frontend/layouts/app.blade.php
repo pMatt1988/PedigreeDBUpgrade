@@ -70,6 +70,11 @@
                                 </form>
                             </div>
                         </li>
+                        @can('Access Backend')
+                            <li class="nav-item">
+                                <a class="nav-link" href="/backend">Admin</a>
+                            </li>
+                        @endcan
                     @endguest
                 </ul>
             </div>

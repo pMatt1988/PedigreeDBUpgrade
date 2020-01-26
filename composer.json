@@ -13,6 +13,8 @@
         "jeroennoten/laravel-adminlte": "^3.0",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
+        "laravelcollective/html": "^6.0",
+        "nayjest/grids": "^2.0",
         "spatie/laravel-html": "^2.24",
         "spatie/laravel-permission": "^3.6"
     },

@@ -8,6 +8,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Nayjest\Grids\Components\Base\RenderableRegistry;
+use Nayjest\Grids\Components\ColumnHeadersRow;
+use Nayjest\Grids\Components\ColumnsHider;
+use Nayjest\Grids\Components\CsvExport;
+use Nayjest\Grids\Components\ExcelExport;
+use Nayjest\Grids\Components\Filters\DateRangePicker;
+use Nayjest\Grids\Components\FiltersRow;
+use Nayjest\Grids\Components\HtmlTag;
+use Nayjest\Grids\Components\OneCellRow;
+use Nayjest\Grids\Components\RecordsPerPage;
+use Nayjest\Grids\Components\RenderFunc;
+use Nayjest\Grids\Components\THead;
+use Nayjest\Grids\EloquentDataProvider;
+use Nayjest\Grids\FieldConfig;
+use Nayjest\Grids\FilterConfig;
+use Nayjest\Grids\Grid;
+use Nayjest\Grids\GridConfig;
 
 class DogController extends Controller
 {
@@ -15,18 +32,106 @@ class DogController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $dogs = Dog::orderBy('name')->paginate(25);
-        return view('dog.index', compact('dogs'));
+        //$dogs = Dog::orderBy('name')->paginate(25);
+
+        $query = (new Dog)->newQuery()->with('parents');
+
+        $grid = new Grid(
+            (new GridConfig)
+                ->setDataProvider(
+                    new EloquentDataProvider(Dog::query())
+                )
+                ->setName('dogs')
+                ->setPageSize(15)
+                ->setColumns([
+                    (new FieldConfig)
+                        ->setName('id')
+                        ->setLabel('ID')
+                        ->setSortable(true)
+                        ->setSorting(Grid::SORT_ASC)
+                    ,
+                    (new FieldConfig)
+                        ->setName('name')
+                        ->setLabel('Name')
+                        ->setSortable(true)
+                        ->addFilter(
+                            (new FilterConfig)
+                                ->setOperator(FilterConfig::OPERATOR_LIKE)
+                        )
+                    ,
+
+                    (new FieldConfig)
+                        ->setName('parents')
+                        ->setLabel('Sire')
+                        ->setSortable(true)
+                        ->setCallback(function ($val) {
+                            foreach ($val as $dog) {
+                                if ($dog->sex == 'male') {
+                                    return $dog->name;
+                                }
+                            }
+                            return 'n/a';
+                        })
+                        ->addFilter(
+                            (new FilterConfig)
+                                ->setOperator(FilterConfig::OPERATOR_LIKE)
+                        )
+                    ,
+
+                    (new FieldConfig)
+                        ->setName('parents')
+                        ->setLabel('Dam')
+                        ->setSortable(true)
+                        ->setCallback(function ($val) {
+                            foreach ($val as $dog) {
+                                if ($dog->sex == 'female') {
+                                    return $dog->name;
+                                }
+                            }
+                            return 'n/a';
+                        })
+                        ->addFilter(
+                            (new FilterConfig)
+                                ->setOperator(FilterConfig::OPERATOR_LIKE)
+                        )
+                    ,
+
+                    (new FieldConfig)
+                        ->setName('dob')
+                        ->setLabel('dob')
+                        ->setSortable(true)
+                    ,
+
+                    (new FieldConfig)
+                        ->setName('id')
+                        ->setLabel('Show')
+                        ->setSortable(false)
+                        ->setCallback(function ($val) {
+                            return "<a class='btn btn-xs btn-primary' href='/dogs/{$val}'>Show</a>";
+                        })
+                    ,
+                ])
+                ->setComponents([
+                    (new THead)
+                        ->setComponents([
+                            (new ColumnHeadersRow),
+                            (new FiltersRow),
+
+
+                        ])
+                    ,
+                ])
+        );
+        $grid = $grid->render();
+        return view('dog.index', compact('grid'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
