@@ -2,11 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ccc8090-dc82-49e9-bc6d-90fba877882f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/EditUsers/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/EditUsers/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/EditUsers/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/EditUsers/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/PedigreeDBUpgrade.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PedigreeDBUpgrade.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/InstallPermissions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/InstallPermissions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Commands/SuperAdminUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/SuperAdminUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DogController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DogController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/backend.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/backend.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/confirm.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/confirm.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/verify.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/verify.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/backend.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/backend.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/dogs.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dogs.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +152,8 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
       <path value="$PROJECT_DIR$/vendor/seld/jsonlint" />
       <path value="$PROJECT_DIR$/vendor/seld/phar-utils" />
+      <path value="$PROJECT_DIR$/vendor/almasaeed2010/adminlte" />
+      <path value="$PROJECT_DIR$/vendor/jeroennoten/laravel-adminlte" />
     </include_path>
   </component>
   <component name="ProjectId" id="1WaZIK6ftRKrysIPOITlbSpU2hO" />
@@ -139,7 +167,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/backend/EditUsers" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -150,16 +178,16 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\public\js" />
-      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\resources\views\frontend\layouts" />
-      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\resources\sass" />
-      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\database\migrations" />
-      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\resources\frontend\layouts" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\resources\views" />
       <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\app" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\resources\views\backend\EditUsers" />
+      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\resources\views\backend\layouts" />
+      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\resources\views\frontend\layouts" />
+      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\public\js" />
+      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\resources\sass" />
     </key>
   </component>
   <component name="RunManager">
@@ -194,7 +222,10 @@
       <workItem from="1579411573272" duration="84000" />
       <workItem from="1579411670029" duration="5034000" />
       <workItem from="1579452765190" duration="15355000" />
-      <workItem from="1579469748514" duration="1526000" />
+      <workItem from="1579469748514" duration="5558000" />
+      <workItem from="1579500534172" duration="3457000" />
+      <workItem from="1579612081587" duration="4928000" />
+      <workItem from="1579754826395" duration="3601000" />
     </task>
     <servers />
   </component>
@@ -206,29 +237,33 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="853" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1579456851810" />
-    <state x="847" y="450" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1579409794787">
+    <state x="847" y="450" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1579474420705">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="847" y="450" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1579409794787" />
+    <state x="847" y="450" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1579474420705" />
     <state x="847" y="458" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1579457515561">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="847" y="458" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1579457515561" />
+    <state x="1060" y="454" key="FileChooserDialogImpl" timestamp="1579972674805">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1060" y="454" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1579972674805" />
     <state x="781" y="342" key="SettingsEditor" timestamp="1579411654618">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="781" y="342" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1579411654618" />
-    <state x="456" y="523" key="com.intellij.ide.util.TipDialog" timestamp="1579469749131">
+    <state x="456" y="523" key="com.intellij.ide.util.TipDialog" timestamp="1579754832459">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="456" y="523" key="com.intellij.ide.util.TipDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1579469749131" />
+    <state x="456" y="523" key="com.intellij.ide.util.TipDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1579754832459" />
     <state x="786" y="309" width="661" height="789" key="find.popup" timestamp="1579409855397">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="786" y="309" width="661" height="789" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1579409855397" />
-    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1579467609934">
+    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1579999612232">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1579467609934" />
+    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1579999612232" />
   </component>
 </project>

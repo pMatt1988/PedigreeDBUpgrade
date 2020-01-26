@@ -47,8 +47,11 @@ class SuperAdminUser extends Command
                 $this->info('Assigned Super Admin Role to ' . $user->email);
             }
             else {
-                $this->info($user->email . ' is already a Super Admin');
+                $this->error($user->email . ' is already a Super Admin');
             }
+        }
+        else {
+            $this->error('User does not exist. Register your user before using this command!');
         }
 
     }

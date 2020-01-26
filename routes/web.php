@@ -25,7 +25,7 @@ Route::get('/', function () {
  * Dog Routes
  */
 Route::prefix('dogs')->group(base_path('routes/dogs.php'));
-Route::group(['prefix' =>'backend','middleware' => ['permission:Access Backend']], base_path('routes/backend.php'));
+Route::group(['prefix' =>'backend','middleware' => ['auth', 'permission:Access Backend']], base_path('routes/backend.php'));
 
 Route::group(['prefix' => 'autocomplete'], function() {
     Route::get('autocomplete/{query}', 'SearchController@result');
@@ -39,3 +39,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 
+
+Auth::routes();
+
+
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', function() {
+    return view('home');
+})->name('home')->middleware('auth');
