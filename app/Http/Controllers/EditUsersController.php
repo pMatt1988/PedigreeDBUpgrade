@@ -11,6 +11,7 @@ use Nayjest\Grids\FieldConfig;
 use Nayjest\Grids\FilterConfig;
 use Nayjest\Grids\Grid;
 use Nayjest\Grids\GridConfig;
+use Spatie\Permission\Models\Role;
 
 //use Nayjest\Grids\Grids;
 
@@ -62,12 +63,12 @@ class EditUsersController extends Controller
                         )
                     ,
                     (new FieldConfig)
-                    ->setName('id')
-                    ->setLabel('edit')
-                    ->setSortable(false)
-                    ->setCallback(function($val) {
-                        return "<a class='btn btn-xs btn-primary' href='users/{$val}/edit'>Edit</a>";
-                    })
+                        ->setName('id')
+                        ->setLabel('edit')
+                        ->setSortable(false)
+                        ->setCallback(function ($val) {
+                            return "<a class='btn btn-xs btn-primary' href='users/{$val}/edit'>Edit</a>";
+                        })
 
                 ])
 
@@ -102,19 +103,28 @@ class EditUsersController extends Controller
     {
         //
 
-        return view('backend.EditUsers.edit');
+        $roles = Role::all();
+        $user = User::find($id);
+        return view('backend.EditUsers.edit', compact('roles', 'user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $inputs = $request->all();
+        $roles = [];
+
+        foreach ($inputs as $key => $input) {
+            if($key != '_token')
+            $roles[] = str_replace("_", " ", $key);
+        }
+        $user = User::find($id);
+        $user->syncRoles($roles);
+
+        return redirect('/backend/users/' . $id . "/edit");
     }
 
     /**

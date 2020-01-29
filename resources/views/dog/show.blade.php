@@ -163,11 +163,12 @@
                 @method('DELETE')
 
                 <a href="/dogs/{{ $dog->id }}/pedigree/4" class="btn btn-success">Pedigree</a>
-                @if(Auth::id() == $dog->user_id || Auth::user()->can('Edit All Dogs'))
-                    <a href="/dogs/{{ $dog->id }}/edit" class="btn btn-primary">Edit</a>
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                @endif
-
+                @auth()
+                    @if(Auth::id() == $dog->user_id || Auth::user()->can('Edit All Dogs'))
+                        <a href="/dogs/{{ $dog->id }}/edit" class="btn btn-primary">Edit</a>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    @endif
+                @endauth
             </form>
 
 

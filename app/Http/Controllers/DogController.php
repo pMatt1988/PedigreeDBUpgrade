@@ -66,7 +66,7 @@ class DogController extends Controller
                     (new FieldConfig)
                         ->setName('parents')
                         ->setLabel('Sire')
-                        ->setSortable(true)
+                        ->setSortable(false)
                         ->setCallback(function ($val) {
                             foreach ($val as $dog) {
                                 if ($dog->sex == 'male') {
@@ -75,16 +75,12 @@ class DogController extends Controller
                             }
                             return 'n/a';
                         })
-                        ->addFilter(
-                            (new FilterConfig)
-                                ->setOperator(FilterConfig::OPERATOR_LIKE)
-                        )
                     ,
 
                     (new FieldConfig)
                         ->setName('parents')
                         ->setLabel('Dam')
-                        ->setSortable(true)
+                        ->setSortable(false)
                         ->setCallback(function ($val) {
                             foreach ($val as $dog) {
                                 if ($dog->sex == 'female') {
@@ -93,10 +89,6 @@ class DogController extends Controller
                             }
                             return 'n/a';
                         })
-                        ->addFilter(
-                            (new FilterConfig)
-                                ->setOperator(FilterConfig::OPERATOR_LIKE)
-                        )
                     ,
 
                     (new FieldConfig)
@@ -145,8 +137,6 @@ class DogController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -181,8 +171,6 @@ class DogController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -194,8 +182,6 @@ class DogController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  $id
-     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -209,9 +195,6 @@ class DogController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param  $id
-     * @return \Illuminate\Http\Response
      */
     public function update($id)
     {
@@ -247,8 +230,6 @@ class DogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
@@ -270,7 +251,8 @@ class DogController extends Controller
             if ($parent == null) {
                 $parent = Dog::create([
                     'name' => $value,
-                    'sex' => $relation == 'sire' ? 'male' : 'female'
+                    'sex' => $relation == 'sire' ? 'male' : 'female',
+                    'user_id' => Auth::id()
                 ]);
             }
 

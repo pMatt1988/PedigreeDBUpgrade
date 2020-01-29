@@ -24,7 +24,6 @@
 @section('body')
     <div class="register-box">
         <div class="register-logo">
-            <a href="{{ $dashboard_url }}">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</a>
         </div>
         <div class="card">
             <div class="card-body register-card-body">

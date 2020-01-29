@@ -10,3 +10,4 @@ Route::get('/', function() {
 Route::get('users', 'EditUsersController@index');
 //Route::get('users/{id}', 'EditUsersController@show');
 Route::get('users/{id}/edit', 'EditUsersController@edit');
+Route::post('users/{id}', 'EditUsersController@update');

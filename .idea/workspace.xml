@@ -2,23 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ccc8090-dc82-49e9-bc6d-90fba877882f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/PedigreeDBUpgrade.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PedigreeDBUpgrade.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DogController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DogController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EditUsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EditUsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Pedigree/Pedigree.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Pedigree/Pedigree.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/EditUsers/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/EditUsers/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dog/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dog/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/EditUsers/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/EditUsers/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/dog/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dog/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/passwords/reset.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/verify.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/verify.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/backend.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/backend.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +229,7 @@
       <workItem from="1579469748514" duration="5558000" />
       <workItem from="1579500534172" duration="3457000" />
       <workItem from="1579612081587" duration="4928000" />
-      <workItem from="1579754826395" duration="21220000" />
+      <workItem from="1579754826395" duration="30951000" />
     </task>
     <servers />
   </component>
@@ -263,10 +256,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1060" y="454" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1579972674805" />
-    <state x="781" y="342" key="SettingsEditor" timestamp="1579411654618">
+    <state x="781" y="342" key="SettingsEditor" timestamp="1580269086144">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="781" y="342" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1579411654618" />
+    <state x="781" y="342" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1580269086143" />
     <state x="456" y="523" key="com.intellij.ide.util.TipDialog" timestamp="1579754832459">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -275,10 +268,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="786" y="309" width="661" height="789" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1580014100352" />
-    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1580067146963">
+    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1580270666392">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1580067146963" />
+    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1580270666392" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
