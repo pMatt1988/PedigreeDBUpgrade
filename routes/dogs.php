@@ -1,5 +1,6 @@
 <?php
 
+use App\Dog;
 use App\Http\Controllers\DogController;
 use App\Http\Controllers\PedigreeController;
 
@@ -16,6 +17,12 @@ Route::get('{id}/pedigree/{nGens}', [PedigreeController::class, 'show']);
 
 Route::get('testmate', [PedigreeController::class, 'testmate']);
 Route::get('testmate/show', [PedigreeController::class, 'showtestmate']);
+
+Route::get('{id}/test', function($id) {
+    $dog = Dog::find(12);
+    dd($dog->sire);
+    return 'Test ' . $id;
+});
 
 
 //Route::get('search', [AdvancedSearchController::class, 'index'])->name('advsearch');

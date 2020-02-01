@@ -35,14 +35,15 @@ class DogController extends Controller
      */
     public function index()
     {
+
         //$dogs = Dog::orderBy('name')->paginate(25);
 
-        $query = (new Dog)->newQuery()->with('parents');
+        $query = (new Dog)->newQuery()->with(['sire', 'dam']);
 
         $grid = new Grid(
             (new GridConfig)
                 ->setDataProvider(
-                    new EloquentDataProvider(Dog::query())
+                    new EloquentDataProvider($query)
                 )
                 ->setName('dogs')
                 ->setPageSize(15)
@@ -64,30 +65,24 @@ class DogController extends Controller
                     ,
 
                     (new FieldConfig)
-                        ->setName('parents')
+                        ->setName('first_sire')
                         ->setLabel('Sire')
                         ->setSortable(false)
                         ->setCallback(function ($val) {
-                            foreach ($val as $dog) {
-                                if ($dog->sex == 'male') {
-                                    return $dog->name;
-                                }
-                            }
-                            return 'n/a';
+                            if ($val)
+                                return $val->name;
+                            return '';
                         })
                     ,
 
                     (new FieldConfig)
-                        ->setName('parents')
+                        ->setName('first_dam')
                         ->setLabel('Dam')
                         ->setSortable(false)
                         ->setCallback(function ($val) {
-                            foreach ($val as $dog) {
-                                if ($dog->sex == 'female') {
-                                    return $dog->name;
-                                }
-                            }
-                            return 'n/a';
+                            if ($val)
+                                return $val->name;
+                            return '';
                         })
                     ,
 

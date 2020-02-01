@@ -112,6 +112,22 @@ class Dog extends Model
         return null;
     }
 
+    public function sire() {
+        return $this->belongsToMany(Dog::class, 'dog_relationship', 'dog_id', 'parent_id', 'id')->wherePivot('relation', 'sire');
+    }
+
+    public function getFirstSireAttribute() {
+        return $this->sire->first();
+    }
+
+    public function dam() {
+        return $this->belongsToMany(Dog::class, 'dog_relationship', 'dog_id', 'parent_id', 'id')->wherePivot('relation', 'dam');
+    }
+
+    public function getFirstDamAttribute() {
+        return $this->dam->first();
+    }
+
     public function parents()
     {
         return $this->belongsToMany(Dog::class, 'dog_relationship', 'dog_id', 'parent_id', 'id')->withPivot('relation');

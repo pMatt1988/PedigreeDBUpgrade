@@ -11,7 +11,8 @@
         <div class="">
             <input id="image" name="image" type="file" class="form-control-file">
             @if($dog->image_url != null)
-                <img src="{{'/storage/pedigree-img/' . $dog->image_url}}" alt="Dog Image" id="image-view" class="img-fluid p-5">
+                <img src="{{'/storage/pedigree-img/' . $dog->image_url}}" alt="Dog Image" id="image-view"
+                     class="img-fluid p-5">
             @else
                 <img src="" alt="Dog Image" id="image-view" class="img-fluid p-5" hidden>
             @endif
@@ -54,13 +55,13 @@
                 <div class="custom-control custom-radio custom-control-inline">
                     <input name="sex" id="sexMale" type="radio" class="custom-control-input form-control-sm"
                            value="male"
-                            {{ (old('sex') === 'male' || $dog->sex === 'male' || $dog->sex === null) ? 'checked' : '' }}>
+                        {{ (old('sex') === 'male' || $dog->sex === 'male' || $dog->sex === null) ? 'checked' : '' }}>
                     <label for="sexMale" class="custom-control-label">Male</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
                     <input name="sex" id="sexFemale" type="radio" class="custom-control-input form-control-sm"
                            value="female"
-                            {{ (old('sex') == 'female' || $dog->sex == 'female') ? 'checked' : '' }}>
+                        {{ (old('sex') == 'female' || $dog->sex == 'female') ? 'checked' : '' }}>
                     <label for="sexFemale" class="custom-control-label">Female</label>
                 </div>
             </div>
@@ -167,14 +168,15 @@
 
 
 @push('after-scripts')
-    {{ asset('js/typeahead.js') }}
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/typeahead.js') }}">
+    </script>
     <script type="text/javascript">
         $('#sire').typeahead({
             minLength: 3,
             fitToElement: true,
             source: function (query, process) {
-                $.get('../../autocomplete/' + query + '/male', function (data) {
+                $.get('/api/autocomplete/' + query + '/male', function (data) {
                     console.log(data);
                     return process(JSON.parse(data));
                 });
@@ -187,7 +189,7 @@
             minLength: 3,
             fitToElement: true,
             source: function (query, process) {
-                $.get('../../autocomplete/' + query + '/female', function (data) {
+                $.get('/api/autocomplete/' + query + '/female', function (data) {
                     console.log(data);
                     return process(JSON.parse(data));
                 });

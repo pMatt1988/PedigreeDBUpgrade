@@ -27,7 +27,7 @@ Route::get('/', function () {
 Route::prefix('dogs')->group(base_path('routes/dogs.php'));
 Route::group(['prefix' =>'backend','middleware' => ['auth', 'permission:Access Backend']], base_path('routes/backend.php'));
 
-Route::group(['prefix' => 'autocomplete'], function() {
+Route::group(['prefix' => 'api'], function() {
     Route::get('autocomplete/{query}', 'SearchController@result');
     Route::get('autocomplete/{query}/{sex}', 'SearchController@resultsex');
 });

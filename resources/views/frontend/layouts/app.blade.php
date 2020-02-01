@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @stack('after-styles')
 </head>
 <body>
 <div id="app">
@@ -87,5 +88,8 @@
         </div>
     </main>
 </div>
+
+@stack('after-scripts')
+
 </body>
 </html>
