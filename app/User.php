@@ -37,4 +37,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function dogs() {
+        return $this->hasMany(Dog::class, 'user_id', 'id');
+    }
 }

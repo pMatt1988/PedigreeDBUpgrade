@@ -4,6 +4,7 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Carbon;
 
 
@@ -120,6 +121,7 @@ class Dog extends Model
         return $this->sire->first();
     }
 
+
     public function dam() {
         return $this->belongsToMany(Dog::class, 'dog_relationship', 'dog_id', 'parent_id', 'id')->wherePivot('relation', 'dam');
     }
@@ -131,6 +133,10 @@ class Dog extends Model
     public function parents()
     {
         return $this->belongsToMany(Dog::class, 'dog_relationship', 'dog_id', 'parent_id', 'id')->withPivot('relation');
+    }
+
+    public function dogs() {
+
     }
 
 

@@ -101,11 +101,16 @@ class EditUsersController extends Controller
      */
     public function edit($id)
     {
-        //
 
         $roles = Role::all();
-        $user = User::find($id);
-        return view('backend.EditUsers.edit', compact('roles', 'user'));
+        $user = User::with('dogs')->find($id);
+        $dogsgrid =
+            (new GridConfig)
+                ->setName('user_dogs')
+                ->setDataProvider($user->dogs)
+            ->set
+
+        return view('backend.EditUsers.edit', compact('roles', 'user', 'dogs'));
     }
 
     /**

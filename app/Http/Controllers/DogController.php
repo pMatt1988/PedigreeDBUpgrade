@@ -3,28 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Dog;
+use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use Nayjest\Grids\Components\Base\RenderableRegistry;
-use Nayjest\Grids\Components\ColumnHeadersRow;
-use Nayjest\Grids\Components\ColumnsHider;
-use Nayjest\Grids\Components\CsvExport;
-use Nayjest\Grids\Components\ExcelExport;
-use Nayjest\Grids\Components\Filters\DateRangePicker;
-use Nayjest\Grids\Components\FiltersRow;
-use Nayjest\Grids\Components\HtmlTag;
-use Nayjest\Grids\Components\OneCellRow;
-use Nayjest\Grids\Components\RecordsPerPage;
-use Nayjest\Grids\Components\RenderFunc;
-use Nayjest\Grids\Components\THead;
+use Intervention\Image\Facades\Image;
+use Nayjest\Grids\DataRow;
 use Nayjest\Grids\EloquentDataProvider;
 use Nayjest\Grids\FieldConfig;
 use Nayjest\Grids\FilterConfig;
 use Nayjest\Grids\Grid;
 use Nayjest\Grids\GridConfig;
+use PHPUnit\Util\Filter;
 
 class DogController extends Controller
 {
@@ -38,7 +31,20 @@ class DogController extends Controller
 
         //$dogs = Dog::orderBy('name')->paginate(25);
 
-        $query = (new Dog)->newQuery()->with(['sire', 'dam']);
+        //$query = (new Dog)->newQuery()->with(['sire', 'dam']);
+        $query = (new Dog)->newQuery()
+            ->leftJoin('dog_relationship as sire', function (Builder $join) {
+                $join->on('sire.dog_id', '=', 'dogs.id')
+                    ->where('sire.relation', 'sire')->orWhereNull('sire.relation');
+
+            })
+            ->leftJoin('dog_relationship as dam', function (Builder $join) {
+                $join->on('dam.dog_id', '=', 'dogs.id')
+                    ->where('dam.relation', 'dam')->orWhereNull('dam.relation');
+
+            })
+            ->addSelect('name', 'dob', 'id', 'pretitle', 'posttitle', 'sire.parent_id', 'sire.parent_name as sire_name', 'dam.parent_id', 'dam.parent_name as dam_name');
+
 
         $grid = new Grid(
             (new GridConfig)
@@ -62,55 +68,79 @@ class DogController extends Controller
                             (new FilterConfig)
                                 ->setOperator(FilterConfig::OPERATOR_LIKE)
                         )
+                        ->setCallback(function ($val, DataRow $row) {
+                            $src = $row->getSrc();
+                            $newval = strtoupper($val);
+                            if ($src->pretitle) {
+                                $pretitle = strtoupper($src->pretitle);
+                                $newval = "<span class='text-success'>{$pretitle}</span> " . $newval;
+                            }
+                            if ($src->posttitle) {
+                                $posttitle = strtoupper($src->posttitle);
+                                $newval = $newval . " <span class='text-success'>{$posttitle}</span>";
+                            }
+                            return "<a href='/dogs/{$src->id}'>" . $newval . "</a>";
+                        })
                     ,
 
                     (new FieldConfig)
-                        ->setName('first_sire')
+                        ->setName('sire_name')
                         ->setLabel('Sire')
-                        ->setSortable(false)
-                        ->setCallback(function ($val) {
-                            if ($val)
-                                return $val->name;
-                            return '';
+                        ->setSortable(true)
+                        ->setCallback(function ($val, DataRow $row) {
+                            $src = $row->getSrc();
+                            return "<a href='/dogs/{$src->id}'>" . strtoupper($val) . "</a>";
                         })
+                        ->addFilter(
+                            (new FilterConfig)
+                                ->setOperator(FilterConfig::OPERATOR_LIKE)
+                                ->setName('sire.parent_name')
+                        )
                     ,
 
                     (new FieldConfig)
-                        ->setName('first_dam')
+                        ->setName('dam_name')
                         ->setLabel('Dam')
-                        ->setSortable(false)
-                        ->setCallback(function ($val) {
-                            if ($val)
-                                return $val->name;
-                            return '';
+                        ->setSortable(true)
+                        ->setCallback(function ($val, DataRow $row) {
+                            $src = $row->getSrc();
+                            return "<a href='/dogs/{$src->id}'>" . strtoupper($val) . "</a>";
                         })
+                        ->addFilter(
+                            (new FilterConfig)
+                                ->setOperator(FilterConfig::OPERATOR_LIKE)
+                                ->setName('dam.parent_name')
+                        )
                     ,
 
                     (new FieldConfig)
                         ->setName('dob')
-                        ->setLabel('dob')
+                        ->setLabel('Birth Date')
                         ->setSortable(true)
-                    ,
-
-                    (new FieldConfig)
-                        ->setName('id')
-                        ->setLabel('Show')
-                        ->setSortable(false)
                         ->setCallback(function ($val) {
-                            return "<a class='btn btn-xs btn-primary' href='/dogs/{$val}'>Show</a>";
+                            if ($val) {
+                                $date = Carbon::parse($val);
+
+                                return $date->format('d/m/Y');
+                            }
+                            return $val;
                         })
+                        ->addFilter(
+                            (new FilterConfig)->setOperator(FilterConfig::OPERATOR_LIKE)
+
+                        )
                     ,
                 ])
-                ->setComponents([
-                    (new THead)
-                        ->setComponents([
-                            (new ColumnHeadersRow),
-                            (new FiltersRow),
-
-
-                        ])
-                    ,
-                ])
+//                ->setComponents([
+//                    (new THead)
+//                        ->setComponents([
+//                            (new ColumnHeadersRow),
+//                            (new FiltersRow),
+//
+//
+//                        ])
+//                    ,
+//                ])
         );
         $grid = $grid->render();
         return view('dog.index', compact('grid'));
@@ -194,7 +224,7 @@ class DogController extends Controller
     public function update($id)
     {
         $dog = Dog::findOrFail($id);
-        $validated = request()->validate($this->validationRules());
+        $validated = request()->validate($this->validationRules($id));
 
         $dog->update($validated);
 
@@ -257,7 +287,8 @@ class DogController extends Controller
                     'relation' => $relation
                 ],
                 [
-                    'parent_id' => $parent->id
+                    'parent_id' => $parent->id,
+                    'parent_name' => $parent->name
                 ]);
 
 //            } else {
@@ -346,25 +377,25 @@ class DogController extends Controller
 
     }
 
-    private function validationRules()
+    private function validationRules($id = 0)
     {
         return [
-            'name' => ['required'],
-            'sex' => ['required', 'in:male,female'],
-            'dob' => ['nullable', 'date_format:Y-m-d'],
-            'pretitle' => ['nullable', 'max:32'],
-            'posttitle' => ['nullable', 'max:32'],
-            'reg' => ['nullable', 'max:64'],
-            'color' => ['nullable', 'max:64'],
-            'markings' => ['nullable', 'max:64'],
+            'name' => 'required|unique:dogs,name,' . $id,
+            'sex' => 'required|in:male,female',
+            'dob' => 'nullable|date_format:Y-m-d',
+            'pretitle' => 'nullable|max:32',
+            'posttitle' => 'nullable|max:32',
+            'reg' => 'nullable|max:64',
+            'color' => 'nullable|max:64',
+            'markings' => 'nullable|max:64',
 
             'image' => ['nullable', 'image',
                 Rule::dimensions()
                     ->maxWidth(config('dog.image-max-width'))
                     ->maxHeight(config('dog.image-max-height'))],
 
-            'breeder' => ['nullable', 'max:32'],
-            'owner' => ['nullable', 'max:32'],
+            'breeder' => 'nullable|max:32',
+            'owner' => 'nullable|max:32',
             'website' => ['nullable', 'url'],
         ];
     }

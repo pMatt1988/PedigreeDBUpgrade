@@ -3,6 +3,7 @@
 use App\Dog;
 use App\Http\Controllers\DogController;
 use App\Http\Controllers\PedigreeController;
+use Illuminate\Database\Query\Builder;
 
 Route::get('/', [DogController::class, 'index'])->name('dogindex');
 Route::get('create', [DogController::class, 'create'])->name('dogcreate')->middleware(['auth', 'permission:Create Dog']);
@@ -18,10 +19,16 @@ Route::get('{id}/pedigree/{nGens}', [PedigreeController::class, 'show']);
 Route::get('testmate', [PedigreeController::class, 'testmate']);
 Route::get('testmate/show', [PedigreeController::class, 'showtestmate']);
 
-Route::get('{id}/test', function($id) {
-    $dog = Dog::find(12);
-    dd($dog->sire);
-    return 'Test ' . $id;
+Route::get('test', function () {
+    $query = (new Dog)->newQuery()
+        ->leftJoin('dog_relationship', function (Builder $join) {
+            $join->on('dog_relationship.dog_id', '=', 'dogs.id')
+                ->where('dog_relationship.relation', 'male')->orWhereNull('dog_');
+        })
+        ->first();
+
+    dd($query);
+    return 'test';
 });
 
 

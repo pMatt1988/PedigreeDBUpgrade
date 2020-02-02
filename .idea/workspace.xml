@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ccc8090-dc82-49e9-bc6d-90fba877882f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_001156_add_name_to_dog_relationship.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_02_02_024159_drop_unique_name_on_dogs.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/PedigreeDBUpgrade.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PedigreeDBUpgrade.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Dog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Dog.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DogController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DogController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dog/masterform.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dog/masterform.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EditUsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EditUsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/dogs.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dogs.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -157,6 +158,10 @@
       <path value="$PROJECT_DIR$/vendor/nayjest/grids" />
       <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-html" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
     </include_path>
   </component>
   <component name="ProjectId" id="1WaZIK6ftRKrysIPOITlbSpU2hO" />
@@ -184,16 +189,16 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\resources\views" />
-      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\app" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\app\Http\Controllers" />
       <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\resources\views\backend\EditUsers" />
       <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\resources\views\backend\layouts" />
       <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\resources\views\frontend\layouts" />
       <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\public\js" />
-      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\resources\sass" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\resources\views" />
+      <recent name="C:\Users\Matthew\Documents\Projects\Laravel\PedigreeDBUpgrade\app" />
     </key>
   </component>
   <component name="RunManager">
@@ -232,7 +237,7 @@
       <workItem from="1579500534172" duration="3457000" />
       <workItem from="1579612081587" duration="4928000" />
       <workItem from="1579754826395" duration="37374000" />
-      <workItem from="1580594082989" duration="1344000" />
+      <workItem from="1580594082989" duration="22592000" />
     </task>
     <servers />
   </component>
@@ -251,10 +256,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="847" y="450" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1579474420705" />
-    <state x="847" y="458" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1579457515561">
+    <state x="847" y="458" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1580661726936">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="847" y="458" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1579457515561" />
+    <state x="847" y="458" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1580661726936" />
     <state x="1060" y="454" key="FileChooserDialogImpl" timestamp="1579972674805">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -267,14 +272,14 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="456" y="523" key="com.intellij.ide.util.TipDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1580594135856" />
-    <state x="786" y="309" width="661" height="789" key="find.popup" timestamp="1580014100352">
+    <state x="786" y="309" width="661" height="789" key="find.popup" timestamp="1580660948841">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="786" y="309" width="661" height="789" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1580014100352" />
-    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1580595564592">
+    <state x="786" y="309" width="661" height="789" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1580660948841" />
+    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1580664180447">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1580595564592" />
+    <state x="780" y="320" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1580664180447" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
