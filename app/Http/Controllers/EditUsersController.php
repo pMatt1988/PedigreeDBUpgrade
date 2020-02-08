@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 
+use App\Dog;
 use Html;
 use Illuminate\Http\Request;
 use App\User;
+use Nayjest\Grids\DataRow;
 use Nayjest\Grids\EloquentDataProvider;
 use Nayjest\Grids\FieldConfig;
 use Nayjest\Grids\FilterConfig;
@@ -104,13 +106,26 @@ class EditUsersController extends Controller
 
         $roles = Role::all();
         $user = User::with('dogs')->find($id);
-        $dogsgrid =
-            (new GridConfig)
-                ->setName('user_dogs')
-                ->setDataProvider($user->dogs)
-            ->set
 
-        return view('backend.EditUsers.edit', compact('roles', 'user', 'dogs'));
+        $query = (new Dog)->newQuery()->where('user_id', $id);
+
+        $cfg = (new GridConfig)
+            ->setDataProvider(new EloquentDataProvider($query))
+            ->setColumns([
+                new FieldConfig('id'),
+                (new FieldConfig)
+                ->setName('name')
+                ->setLabel('Name')
+                ->setCallback(function($val, DataRow $row) {
+                    $src = $row->getSrc();
+                    return "<a href='/dogs/{$src->id}'>" . $val . "</a>";
+                }),
+                new FieldConfig('dob')
+            ]);
+
+        $grid = new Grid($cfg);
+        $grid = $grid->render();
+        return view('backend.EditUsers.edit', compact('roles', 'user', 'grid'));
     }
 
     /**
@@ -123,8 +138,8 @@ class EditUsersController extends Controller
         $roles = [];
 
         foreach ($inputs as $key => $input) {
-            if($key != '_token')
-            $roles[] = str_replace("_", " ", $key);
+            if ($key != '_token')
+                $roles[] = str_replace("_", " ", $key);
         }
         $user = User::find($id);
         $user->syncRoles($roles);

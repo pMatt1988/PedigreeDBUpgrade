@@ -31,5 +31,14 @@
                 </form>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-header bg-primary">
+                Dogs:
+            </div>
+            <div class="card-body">
+                {!! $grid !!}
+            </div>
+        </div>
     </div>
 @endsection
