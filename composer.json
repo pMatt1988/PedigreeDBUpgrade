@@ -10,7 +10,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/pmatt1988/rapyd-laravel"
+            "url": "https://github.com/pmatt1988/grids"
         }
     ],
 
@@ -22,7 +22,7 @@
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
         "laravelcollective/html": "^6.0",
-        "nayjest/grids": "^2.0",
+        "pmatt1988/grids": "dev-master",
         "spatie/laravel-html": "^2.24",
         "spatie/laravel-permission": "^3.6"
     },
