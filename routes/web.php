@@ -49,6 +49,6 @@ Route::get('/home', function () {
 
 Route::get('test', function () {
 });
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 
