@@ -226,14 +226,6 @@ class DogController extends Controller
         $oldDog = $dog;
         $validated = request()->validate($this->validationRules($id));
         $dog->update($validated);
-
-        //Refresh dog model to get updated changes.
-        $dog->refresh();
-
-        /*
-         * Set up relationships
-         */
-        $this->setUpDogRelationships($dog, ['sire', 'dam']);
         $dog->refresh();
 
 

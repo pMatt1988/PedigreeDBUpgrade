@@ -84,7 +84,7 @@ class Dog extends Model
     {
         $model = static::query()->create($attributes);
 
-        $model->setUpDogRelationships(['sire', 'dam']);
+        $model->setUpDogRelationships();
 
         return $model;
 
@@ -154,10 +154,18 @@ class Dog extends Model
         return $this->belongsToMany(Dog::class, 'dog_relationship', 'dog_id', 'parent_id', 'id')->withPivot('relation');
     }
 
-
-    private function setUpDogRelationships($relations)
+    public function update(array $attributes = [], array $options = [])
     {
-        $dog = $this;
+        if (! $this->exists) {
+            return false;
+        }
+        $return = $this->fill($attributes)->save($options);
+        $this->setUpDogRelationships();
+        return $return;
+    }
+
+    public function setUpDogRelationships(array $relations = ['sire', 'dam'])
+    {
 
         foreach ($relations as $relation) {
             $value = request($relation);
@@ -175,7 +183,7 @@ class Dog extends Model
 
             DB::table('dog_relationship')->updateOrInsert(
                 [
-                    'dog_id' => $dog->id,
+                    'dog_id' => $this->id,
                     'relation' => $relation
                 ],
                 [
