@@ -48,6 +48,7 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::get('test', function () {
+    dd(json_encode(Auth::user()));
 });
 Auth::routes(['verify' => true]);
 

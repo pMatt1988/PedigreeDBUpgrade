@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dog;
+use App\DogHistory;
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ use Nayjest\Grids\FilterConfig;
 use Nayjest\Grids\Grid;
 use Nayjest\Grids\GridConfig;
 use PHPUnit\Util\Filter;
+use Session;
 
 class DogController extends Controller
 {
@@ -189,6 +191,8 @@ class DogController extends Controller
 
         }
 
+        //create an edit history for this dog so that we can go back to it
+
         return redirect('dogs');
     }
 
@@ -214,6 +218,7 @@ class DogController extends Controller
         $dog = Dog::with('parents')->find($id);
         $method = 'PATCH';
 
+
         return view('dog.edit', compact('dog', 'method'));
     }
 
@@ -223,9 +228,9 @@ class DogController extends Controller
      */
     public function update($id)
     {
-        $dog = Dog::findOrFail($id);
+        $dog = Dog::with(['parents'])->findOrFail($id);
+        $oldDog = $dog;
         $validated = request()->validate($this->validationRules($id));
-
         $dog->update($validated);
 
         //Refresh dog model to get updated changes.
@@ -235,9 +240,11 @@ class DogController extends Controller
          * Set up relationships
          */
         $this->setUpDogRelationships($dog, ['sire', 'dam']);
+        $dog->refresh();
 
 
         if (request()->hasFile('image')) {
+
             $imagePath = $this->handleImage(request()->file('image'));
             $fileName = basename($imagePath);
             $this->makeThumbnail(request()->file('image'), $fileName);
@@ -245,6 +252,10 @@ class DogController extends Controller
             $this->deleteImage($dog->image_url);
             $dog->image_url = $fileName;
             $dog->save();
+        }
+
+        if ($dog->wasChanged() || request('sire') != $dog->father()->name || request('dam') != $dog->mother()->name) {
+            $this->createDogHistory($dog);
         }
 
 
@@ -310,6 +321,7 @@ class DogController extends Controller
 //            }
         }
     }
+
 
     private function handleImage($image)
     {
@@ -398,5 +410,15 @@ class DogController extends Controller
             'owner' => 'nullable|max:32',
             'website' => ['nullable', 'url'],
         ];
+    }
+
+    private function createDogHistory($dog)
+    {
+        DogHistory::create([
+            'dog_id' => $dog->id ?? 0,
+            'sire_id' => $dog->father()->id ?? 0,
+            'dam_id' => $dog->mother()->id ?? 0,
+            'model' => json_encode($dog->getAttributes())
+        ]);
     }
 }

@@ -26,6 +26,7 @@
 </head>
 <body class="@yield('classes_body')" @yield('body_data')>
 
+
 @yield('body')
 
 @if(! config('adminlte.enabled_laravel_mix'))

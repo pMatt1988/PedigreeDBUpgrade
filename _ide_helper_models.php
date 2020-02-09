@@ -60,8 +60,12 @@ namespace App{
  * @property string|null $website
  * @property string|null $breeder
  * @property string|null $owner
+ * @property-read int|null $dam_count
+ * @property-read mixed $first_dam
+ * @property-read mixed $first_sire
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Dog[] $parents
  * @property-read int|null $parents_count
+ * @property-read int|null $sire_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Dog whereBreeder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Dog whereCallname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Dog whereImageUrl($value)
@@ -70,6 +74,31 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Dog whereWebsite($value)
  */
 	class Dog extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\DogHistory
+ *
+ * @property int $id
+ * @property int $dog_id
+ * @property int $sire_id
+ * @property int $dam_id
+ * @property string $model
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DogHistory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DogHistory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DogHistory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DogHistory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DogHistory whereDamId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DogHistory whereDogId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DogHistory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DogHistory whereModel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DogHistory whereSireId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DogHistory whereUpdatedAt($value)
+ */
+	class DogHistory extends \Eloquent {}
 }
 
 namespace App{
@@ -84,6 +113,8 @@ namespace App{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Dog[] $dogs
+ * @property-read int|null $dogs_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Permission[] $permissions

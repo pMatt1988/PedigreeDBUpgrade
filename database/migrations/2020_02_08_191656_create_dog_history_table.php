@@ -15,6 +15,10 @@ class CreateDogHistoryTable extends Migration
     {
         Schema::create('dog_history', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedInteger('dog_id');
+            $table->unsignedInteger('sire_id');
+            $table->unsignedInteger('dam_id');
+            $table->longText('model');
             $table->timestamps();
         });
     }
