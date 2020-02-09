@@ -40,12 +40,19 @@ class DogController extends Controller
                     ->where('sire.relation', 'sire')->orWhereNull('sire.relation');
 
             })
-            ->leftJoin('dog_relationship as dam', function (Builder $join) {
+            ->leftJoin('dogs as sire_dog', function (Builder $join) {
+                $join->on('sire_dog.id', '=', 'sire.parent_id');
+            })
+            ->
+            leftJoin('dog_relationship as dam', function (Builder $join) {
                 $join->on('dam.dog_id', '=', 'dogs.id')
                     ->where('dam.relation', 'dam')->orWhereNull('dam.relation');
 
             })
-            ->addSelect('name', 'dob', 'id', 'pretitle', 'posttitle', 'sire.parent_id', 'sire.parent_name as sire_name', 'dam.parent_id', 'dam.parent_name as dam_name');
+            ->leftJoin('dogs as dam_dog', function (Builder $join) {
+                $join->on('dam_dog.id', '=', 'dam.parent_id');
+            })
+            ->select('dogs.name', 'dogs.dob', 'dogs.id', 'dogs.pretitle', 'dogs.posttitle', 'sire.parent_id', 'sire_dog.name as sire_name', 'dam.parent_id', 'dam_dog.name as dam_name');
 
 
         $grid = new Grid(
@@ -260,9 +267,6 @@ class DogController extends Controller
 
         return redirect('/dogs/');
     }
-
-
-
 
 
     private function handleImage($image)
