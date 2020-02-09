@@ -1,3 +1,4 @@
+{{--TODO style show history--}}
 @extends('adminlte::page')
 
 @section('content')
@@ -5,22 +6,60 @@
         @if($history)
             @php
                 $model = json_decode($history->model);
-                echo "
-                <div>Name: {$model->name}</div>
-                <div>Birth: {$model->dob}</div>
-                <div>Sex: {$model->sex}</div>
-                <div>Pretitle: {$model->pretitle}</div>
-                <div>Posttitle: {$model->posttitle}</div>
-                <div>Reg#: {$model->reg}</div>
-                <div>Color: {$model->color}</div>
-                <div>Markings: {$model->markings}</div>
-                <div>Website: {$model->website}</div>
-                <div>Breeder: {$model->breeder}</div>
-                <div>Owner: {$model->owner}</div>
-                "
             @endphp
-            <a href="#">Restore</a>
-            <a href="/backend/dogs/history/{{ $history->id }}/delete">Delete</a>
+            <div class="row bg-dark">
+                <div class="col-2">Key</div>
+                <div class="col">Value</div>
+            </div>
+            <div class='row'>
+                <div class='col-2'>Name:</div>
+                <div class='col'>{{$model->name}}</div>
+            </div>
+            <div class='row'>
+                <div class='col-2'>Birth:</div>
+                <div class='col'>{{$model->dob}}</div>
+            </div>
+            <div class='row'>
+                <div class='col-2'>Sex:</div>
+                <div class='col'>{{$model->sex}}</div>
+            </div>
+            <div class='row'>
+                <div class='col-2'>Pre title:</div>
+                <div class='col'>{{$model->pretitle}}</div>
+            </div>
+            <div class='row'>
+                <div class='col-2'>Post title:</div>
+                <div class='col'>{{$model->posttitle}}</div>
+            </div>
+            <div class='row'>
+                <div class='col-2'>Reg #:</div>
+                <div class='col'>{{$model->reg}}</div>
+            </div>
+            <div class='row'>
+                <div class='col-2'>Color:</div>
+                <div class='col'>{{$model->color}}</div>
+            </div>
+            <div class='row'>
+                <div class='col-2'>Markings:</div>
+                <div class='col'>{{$model->markings}}</div>
+            </div>
+            <div class='row'>
+                <div class='col-2'>Website:</div>
+                <div class='col'>{{$model->website}}</div>
+            </div>
+            <div class='row'>
+                <div class='col-2'>Breeder:</div>
+                <div class='col'>{{$model->breeder}}</div>
+            </div>
+            <div class='row'>
+                <div class='col-2'>Owner:</div>
+                <div class='col'>{{$model->owner}}</div>
+            </div>
+
+
+            <br>
+            <a href="#" class="btn btn-primary">Restore</a>
+            <a href="/backend/dogs/history/{{ $history->id }}/delete" class="btn btn-danger">Delete</a>
         @else
             <div>Invalid History ID</div>
         @endif

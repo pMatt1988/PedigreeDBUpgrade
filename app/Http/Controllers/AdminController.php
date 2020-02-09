@@ -33,6 +33,10 @@ class AdminController extends Controller
         return redirect("/backend/dogs/0")->with('fail', 'Failed to delete history from Database!');
     }
 
+    function restorehistory($id) {
+        //TODO implement restore history
+    }
+
     function showdog($id)
     {
         return view('backend.dogs.show');
