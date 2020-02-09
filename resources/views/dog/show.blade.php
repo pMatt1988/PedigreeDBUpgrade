@@ -158,21 +158,19 @@
             <br>
 
 
-            <form method="POST" action="/dogs/{{ $dog->id }}">
-                @csrf
-                @method('DELETE')
+            <div>
 
                 <a href="/dogs/{{ $dog->id }}/pedigree/4" class="btn btn-success">Pedigree</a>
                 @auth()
                     @if(Auth::id() == $dog->user_id || Auth::user()->can('Edit All Dogs'))
                         <a href="/dogs/{{ $dog->id }}/edit" class="btn btn-primary">Edit</a>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        @include('partials.delete-button', ['btnurl' => "/dogs/{$dog->id}/delete", 'msg' => 'You are about to delete ' . $dog->name])
                     @endif
                     @can('View Backend')
-                        <a href="/backend/dogs/{{$dog->id}}/history" class="btn btn-info">History</a>
+                        <a href="/backend/dogs/{{$dog->id}}" class="btn btn-info">Admin</a>
                     @endcan
                 @endauth
-            </form>
+            </div>
 
 
         </div><!--col-->

@@ -174,7 +174,7 @@ class Dog extends Model
             $parent = Dog::where('name', '=', $value)->first();
 
             if ($parent == null) {
-                $parent = Dog::create([
+                $parent = Dog::store([
                     'name' => $value,
                     'sex' => $relation == 'sire' ? 'male' : 'female',
                     'user_id' => Auth::id()

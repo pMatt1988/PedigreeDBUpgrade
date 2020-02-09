@@ -9,10 +9,13 @@ Route::get('/', [DogController::class, 'index'])->name('dogindex');
 Route::get('create', [DogController::class, 'create'])->name('dogcreate')->middleware(['auth', 'permission:Create Dog']);
 
 Route::get('{id}', [DogController::class, 'show'])->name('dogshow');
-Route::post('/', [DogController::class, 'store'])->name('dogstore')->middleware(['auth', 'permission:Create Dog']);;
-Route::get('{id}/edit', [DogController::class, 'edit'])->name('dogedit')->middleware(['auth', 'permission:Edit Dog']);;
-Route::patch('{id}', [DogController::class, 'update'])->name('dogupdate')->middleware(['auth', 'permission:Edit Dog']);;
-Route::delete('{id}', [DogController::class, 'destroy'])->name('dogdestroy')->middleware(['auth', 'permission:Edit Dog']);;
+Route::post('/', [DogController::class, 'store'])->name('dogstore')->middleware(['auth', 'permission:Create Dog']);
+Route::get('{id}/edit', [DogController::class, 'edit'])->name('dogedit')->middleware(['auth', 'permission:Edit Dog']);
+Route::patch('{id}', [DogController::class, 'update'])->name('dogupdate')->middleware(['auth', 'permission:Edit Dog']);
+//Route::delete('{id}', [DogController::class, 'destroy'])->name('dogdestroy')->middleware(['auth', 'permission:Edit Dog']);
+Route::get('{id}/delete', 'DogController@destroy')->middleware(['auth', 'permission:Edit Dog']);
+
+
 
 Route::get('{id}/pedigree/{nGens}', [PedigreeController::class, 'show']);
 

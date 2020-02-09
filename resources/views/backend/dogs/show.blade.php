@@ -65,6 +65,7 @@
 
     <br>
     <a href="/backend/dogs/{{ $dog->id }}/history" class="btn btn-primary">History</a>
-    <a href="/backend/dogs/{{ $dog->id }}/delete" class="btn btn-danger">Delete</a>
+    @include('partials.delete-button', ['btnurl' => "/dogs/{$dog->id}/delete", 'msg' => 'You are about to delete ' . $dog->name])
+{{--    <a href="/backend/dogs/{{ $dog->id }}/delete" class="btn btn-danger">Delete</a>--}}
 @endsection
 
