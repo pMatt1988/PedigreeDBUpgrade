@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Auth;
+use DB;
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
@@ -78,15 +80,28 @@ class Dog extends Model
     ];
 
 
+    public static function store(array $attributes = [])
+    {
+        $model = static::query()->create($attributes);
 
-    public function getDate() {
+        $model->setUpDogRelationships(['sire', 'dam']);
+
+        return $model;
+
+    }
+
+    public function getDate()
+    {
         return $this->dob->format('Y-m-d');
     }
 
-    public function getDBDate() {
+    public function getDBDate()
+    {
 
     }
-    public function getBirthYear() {
+
+    public function getBirthYear()
+    {
         return $this->dob->format('Y');
     }
 
@@ -113,20 +128,24 @@ class Dog extends Model
         return null;
     }
 
-    public function sire() {
+    public function sire()
+    {
         return $this->belongsToMany(Dog::class, 'dog_relationship', 'dog_id', 'parent_id', 'id')->wherePivot('relation', 'sire');
     }
 
-    public function getFirstSireAttribute() {
+
+    public function getFirstSireAttribute()
+    {
         return $this->sire->first();
     }
 
-
-    public function dam() {
+    public function dam()
+    {
         return $this->belongsToMany(Dog::class, 'dog_relationship', 'dog_id', 'parent_id', 'id')->wherePivot('relation', 'dam');
     }
 
-    public function getFirstDamAttribute() {
+    public function getFirstDamAttribute()
+    {
         return $this->dam->first();
     }
 
@@ -135,9 +154,35 @@ class Dog extends Model
         return $this->belongsToMany(Dog::class, 'dog_relationship', 'dog_id', 'parent_id', 'id')->withPivot('relation');
     }
 
-    public function dogs() {
 
+    private function setUpDogRelationships($relations)
+    {
+        $dog = $this;
+
+        foreach ($relations as $relation) {
+            $value = request($relation);
+            if ($value === null) continue;
+
+            $parent = Dog::where('name', '=', $value)->first();
+
+            if ($parent == null) {
+                $parent = Dog::create([
+                    'name' => $value,
+                    'sex' => $relation == 'sire' ? 'male' : 'female',
+                    'user_id' => Auth::id()
+                ]);
+            }
+
+            DB::table('dog_relationship')->updateOrInsert(
+                [
+                    'dog_id' => $dog->id,
+                    'relation' => $relation
+                ],
+                [
+                    'parent_id' => $parent->id,
+                    'parent_name' => $parent->name
+                ]);
+
+        }
     }
-
-
 }

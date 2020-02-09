@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Dog;
 use App\DogHistory;
 use DB;
 use Illuminate\Http\Request;
@@ -34,7 +35,16 @@ class AdminController extends Controller
     }
 
     function restorehistory($id) {
-        //TODO implement restore history
+        $history = DogHistory::find($id);
+        $model = json_decode($history->model, true);
+        $dog = Dog::find($history->dog_id);
+        $dog->setRawAttributes($model);
+        $dog->save();
+
+        $history->delete();
+
+        return redirect("backend/dogs/{$dog->id}")->with('success', 'Successfully Restored History!');
+
     }
 
     function showdog($id)

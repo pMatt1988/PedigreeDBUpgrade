@@ -58,7 +58,7 @@
 
 
             <br>
-            <a href="#" class="btn btn-primary">Restore</a>
+            <a href="/backend/dogs/history/{{ $history->id }}/restore" class="btn btn-primary">Restore</a>
             <a href="/backend/dogs/history/{{ $history->id }}/delete" class="btn btn-danger">Delete</a>
         @else
             <div>Invalid History ID</div>

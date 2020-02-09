@@ -171,15 +171,7 @@ class DogController extends Controller
         $validated = $request->validate($this->validationRules());
         $validated['user_id'] = Auth::id();
 
-        $dog = Dog::create($validated);
-
-        //Refresh dog model to make sure our info is up to date!
-        $dog->refresh();
-
-        /*
-         * Set up relationships
-         */
-        $this->setUpDogRelationships($dog, ['sire', 'dam']);
+        $dog = Dog::store($validated);
 
         /*
          * Handle image uploads
@@ -190,6 +182,8 @@ class DogController extends Controller
             $this->makeThumbnail(request()->file('image'), $fileName);
 
         }
+
+        $this->createDogHistory($dog);
 
         //create an edit history for this dog so that we can go back to it
 
@@ -276,51 +270,7 @@ class DogController extends Controller
     }
 
 
-    private function setUpDogRelationships($dog, $relations)
-    {
-        foreach ($relations as $relation) {
-            $value = request($relation);
-            if ($value === null) continue;
 
-            $parent = Dog::where('name', '=', $value)->first();
-
-            if ($parent == null) {
-                $parent = Dog::create([
-                    'name' => $value,
-                    'sex' => $relation == 'sire' ? 'male' : 'female',
-                    'user_id' => Auth::id()
-                ]);
-            }
-
-            DB::table('dog_relationship')->updateOrInsert(
-                [
-                    'dog_id' => $dog->id,
-                    'relation' => $relation
-                ],
-                [
-                    'parent_id' => $parent->id,
-                    'parent_name' => $parent->name
-                ]);
-
-//            } else {
-//
-////                if ($relation === 'sire') {
-////                    $error = \Illuminate\Validation\ValidationException::withMessages([
-////                        'sire' => ['Sire must already exist in the Database'],
-////                    ]);
-////
-////                    throw $error;
-////                }
-////                if($relation === 'dam') {
-////                    $error = \Illuminate\Validation\ValidationException::withMessages([
-////                        'dam' => ['Dam must already exist in the Database.'],
-////                    ]);
-////
-////                    throw $error;
-////                }
-//            }
-        }
-    }
 
 
     private function handleImage($image)

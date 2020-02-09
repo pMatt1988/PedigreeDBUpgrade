@@ -16,6 +16,7 @@ Route::get('dogs/{id}', 'AdminController@showdog');
 Route::get('dogs/{id}/history', 'AdminController@history');
 Route::get('dogs/history/{id}', 'AdminController@showhistory');
 Route::get('dogs/history/{id}/delete', 'AdminController@deletehistory');
+Route::get('dogs/history/{id}/restore', 'AdminController@restorehistory');
 
 Route::get('test', function() {
     return redirect('backend')->with('success', 'Test was a Success!');
