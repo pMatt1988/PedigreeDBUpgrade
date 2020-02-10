@@ -21,6 +21,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                 <a href="{{ $btnurl }}" class="btn btn-danger">Confirm</a>
+
             </div>
         </div>
     </div>

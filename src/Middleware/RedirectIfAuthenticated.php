@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
+use App\Provider\RouteServiceProvider;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
