@@ -8,7 +8,7 @@
         </div>
         @foreach($history as $entry)
             @php
-                $model = json_decode($entry->model);
+                $model = json_decode($entry->model_attributes);
             @endphp
             <div class="row">
                 <div class="col"><a href="/backend/dogs/history/{{ $entry->id }}">{{$model->name}}</a></div>

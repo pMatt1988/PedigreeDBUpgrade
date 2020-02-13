@@ -5,7 +5,7 @@
     <div class="container">
         @if($history)
             @php
-                $model = json_decode($history->model);
+                $model = json_decode($history->model_attributes);
             @endphp
             <div class="row bg-dark">
                 <div class="col-2">Key</div>

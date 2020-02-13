@@ -1,10 +1,11 @@
 <?php
 
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDogHistoryTable extends Migration
+class CreatePicturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +14,12 @@ class CreateDogHistoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('dog_history', function (Blueprint $table) {
+        Schema::create('pictures', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('dog_id');
-            $table->unsignedInteger('sire_id');
-            $table->unsignedInteger('dam_id');
-            $table->longText('model');
+            $table->string('class');
+            $table->bigInteger('class_id');
+            $table->unique(['class', 'class_id']);
+            $table->string('picture');
             $table->timestamps();
         });
     }
@@ -30,6 +31,7 @@ class CreateDogHistoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dog_history');
+
+        Schema::dropIfExists('pictures');
     }
 }

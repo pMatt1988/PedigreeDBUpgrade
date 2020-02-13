@@ -32,7 +32,7 @@ use Illuminate\Support\Carbon;
  * @property-read \App\Dog $dam
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Dog[] $offspring
  * @property-read \App\Dog $sire
- * @property-read \App\Models\Auth\User $user
+ * @property-read \Illuminate\Foundation\Auth\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Dog newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Dog newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Dog query()
@@ -57,6 +57,7 @@ use Illuminate\Support\Carbon;
 class Dog extends Model
 {
     //
+    use HasPicture;
 
     protected $fillable = [
         'user_id',
@@ -79,16 +80,6 @@ class Dog extends Model
         'dob'
     ];
 
-
-    public static function store(array $attributes = [])
-    {
-        $model = static::query()->create($attributes);
-
-        $model->setUpDogRelationships();
-
-        return $model;
-
-    }
 
     public function getDate()
     {
@@ -154,16 +145,15 @@ class Dog extends Model
         return $this->belongsToMany(Dog::class, 'dog_relationship', 'dog_id', 'parent_id', 'id')->withPivot('relation');
     }
 
-    public function update(array $attributes = [], array $options = [])
+    public static function store(array $attributes = [])
     {
-        if (! $this->exists) {
-            return false;
-        }
-        $return = $this->fill($attributes)->save($options);
-        $this->setUpDogRelationships();
-        return $return;
+        $model = static::query()->create($attributes);
+        $model->setUpDogRelationships();
+        return $model;
+
     }
 
+    //region Model Specific Behaviour
     public function setUpDogRelationships(array $relations = ['sire', 'dam'])
     {
 
@@ -193,4 +183,5 @@ class Dog extends Model
 
         }
     }
+    //endregion
 }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Dog;
-use App\DogHistory;
+use App\History;
+use App\Http\Requests\StoreDog;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -168,14 +170,16 @@ class DogController extends Controller
         return view('dog.create', compact('method', 'dog'));
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
+     *
      */
-    public function store(Request $request)
+    public function store(StoreDog $request)
     {
 
-        $validated = $request->validate($this->validationRules());
+        $validated = $request->validated();
         $validated['user_id'] = Auth::id();
 
         $dog = Dog::store($validated);
@@ -183,16 +187,16 @@ class DogController extends Controller
         /*
          * Handle image uploads
          */
-        if (request()->hasFile('image')) {
-            $imagePath = $this->handleImage(request()->file('image'));
-            $fileName = basename($imagePath);
-            $this->makeThumbnail(request()->file('image'), $fileName);
-
-        }
-
-        $this->createDogHistory($dog);
+//        if (request()->hasFile('image')) {
+//                    $imagePath = $this->handleImage(request()->file('image'));
+//            $fileName = basename($imagePath);
+//            $this->makeThumbnail(request()->file('image'), $fileName);
+//
+//        }
 
         //create an edit history for this dog so that we can go back to it
+        //History::create($dog);
+
 
         return redirect('dogs');
     }
@@ -215,44 +219,61 @@ class DogController extends Controller
      */
     public function edit($id)
     {
-        //
+        //Find dog with $id and eagerload it's parents.
         $dog = Dog::with('parents')->find($id);
+
+        //Set our form method to PATCH
         $method = 'PATCH';
 
-
+        //Return the dog.edit view and pass $dog and $method variables.
         return view('dog.edit', compact('dog', 'method'));
     }
 
     /**
      * Update the specified resource in storage.
      *
+     * @param $id int
+     * @param $request Request
+     *
+     * @return object
      */
-    public function update($id)
+    public function update(StoreDog $request, $id)
     {
         $dog = Dog::with(['parents'])->findOrFail($id);
-        $oldDog = $dog;
-        $validated = request()->validate($this->validationRules($id));
+
+        //Create a clone of $dog to use to make a history.
+        $dogClone = clone $dog;
+
+        //Validate our form request
+        $validated = $request->validated();
+
+        //update our $dog with the validated form fields
         $dog->update($validated);
-        $dog->refresh();
+
+        //setup Dog relationships. TODO Separate this from dog logic. IE create a DogRelationship model.
+        $dog->setUpDogRelationships();
 
 
-        if (request()->hasFile('image')) {
 
-            $imagePath = $this->handleImage(request()->file('image'));
+        /*if ($request->hasFile('image')) {
+
+            $imagePath = $this->handleImage($request->file('image'));
             $fileName = basename($imagePath);
-            $this->makeThumbnail(request()->file('image'), $fileName);
+            $this->makeThumbnail($request->file('image'), $fileName);
 
             $this->deleteImage($dog->image_url);
             $dog->image_url = $fileName;
             $dog->save();
+        }*/
+
+        //Check to see if any changes were made to Dog
+        if ($dog->wasChanged()) {
+            //If changes were made, create an Edit History with our $dog clone.
+            History::create($dogClone);
         }
 
-        if ($dog->wasChanged() || request('sire') != $dog->father()->name || request('dam') != $dog->mother()->name) {
-            $this->createDogHistory($dog);
-        }
-
-
-        return redirect('dogs/' . $id);
+        //Redirect to the main dogs list with a success message.
+        return redirect('/dogs/' . $id)->with('success', 'Successfully updated dog!');
 
     }
 
@@ -272,7 +293,7 @@ class DogController extends Controller
     private function handleImage($image)
     {
 
-        $path = config('dog.image-directory');
+        $path = config('picture.image-directory');
         $filePath = $image->store($path, 'public');
 
         return $filePath;
@@ -285,9 +306,9 @@ class DogController extends Controller
 
         //If a width isn't defined, use the width stored in Config.
         if ($width === null)
-            $width = config('dog.image-thumbnail-width');
+            $width = config('picture.image-thumbnail-width');
 
-        $path = config('dog.thumbnail-directory');
+        $path = config('picture.thumbnail-directory');
 
         $filePath = $image->storeAs($path, $fileName, 'public');
         $filePath = Storage::disk('public')->path($filePath);
@@ -338,33 +359,9 @@ class DogController extends Controller
     private function validationRules($id = 0)
     {
         return [
-            'name' => 'required|unique:dogs,name,' . $id,
-            'sex' => 'required|in:male,female',
-            'dob' => 'nullable|date_format:Y-m-d',
-            'pretitle' => 'nullable|max:32',
-            'posttitle' => 'nullable|max:32',
-            'reg' => 'nullable|max:64',
-            'color' => 'nullable|max:64',
-            'markings' => 'nullable|max:64',
 
-            'image' => ['nullable', 'image',
-                Rule::dimensions()
-                    ->maxWidth(config('dog.image-max-width'))
-                    ->maxHeight(config('dog.image-max-height'))],
-
-            'breeder' => 'nullable|max:32',
-            'owner' => 'nullable|max:32',
-            'website' => ['nullable', 'url'],
         ];
     }
 
-    private function createDogHistory($dog)
-    {
-        DogHistory::create([
-            'dog_id' => $dog->id ?? 0,
-            'sire_id' => $dog->father()->id ?? 0,
-            'dam_id' => $dog->mother()->id ?? 0,
-            'model' => json_encode($dog->getAttributes())
-        ]);
-    }
+
 }
