@@ -154,7 +154,8 @@ class Dog extends Model
     }
 
     //region Model Specific Behaviour
-    public function setUpDogRelationships(array $relations = ['sire', 'dam'])
+    public function
+    setUpDogRelationships(array $relations = ['sire', 'dam'])
     {
 
         foreach ($relations as $relation) {
@@ -178,7 +179,6 @@ class Dog extends Model
                 ],
                 [
                     'parent_id' => $parent->id,
-                    'parent_name' => $parent->name
                 ]);
 
         }

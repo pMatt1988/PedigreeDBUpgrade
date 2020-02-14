@@ -27,6 +27,8 @@ class StoreDog extends FormRequest
     {
         return [
             'name' => 'required|unique:dogs,name,' . $this->route('id') ?? '0',
+            'sire' => 'nullable|different:name,dam',
+            'dam' => 'nullable|different:name,sire',
             'sex' => 'required|in:male,female',
             'dob' => 'nullable|date_format:Y-m-d',
             'pretitle' => 'nullable|max:32',

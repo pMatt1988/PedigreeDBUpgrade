@@ -77,6 +77,7 @@ class DogController extends Controller
                         ->setSortable(true)
                         ->addFilter(
                             (new FilterConfig)
+                                ->setName('dogs.name')
                                 ->setOperator(FilterConfig::OPERATOR_LIKE)
                         )
                         ->setCallback(function ($val, DataRow $row) {
@@ -105,7 +106,7 @@ class DogController extends Controller
                         ->addFilter(
                             (new FilterConfig)
                                 ->setOperator(FilterConfig::OPERATOR_LIKE)
-                                ->setName('sire.parent_name')
+                                ->setName('sire_dog.name')
                         )
                     ,
 
@@ -120,7 +121,7 @@ class DogController extends Controller
                         ->addFilter(
                             (new FilterConfig)
                                 ->setOperator(FilterConfig::OPERATOR_LIKE)
-                                ->setName('dam.parent_name')
+                                ->setName('dam_dog.name')
                         )
                     ,
 
@@ -137,7 +138,9 @@ class DogController extends Controller
                             return $val;
                         })
                         ->addFilter(
-                            (new FilterConfig)->setOperator(FilterConfig::OPERATOR_LIKE)
+                            (new FilterConfig)
+                                ->setOperator(FilterConfig::OPERATOR_LIKE)
+                                ->setName('dogs.dob')
 
                         )
                     ,
@@ -252,7 +255,6 @@ class DogController extends Controller
 
         //setup Dog relationships. TODO Separate this from dog logic. IE create a DogRelationship model.
         $dog->setUpDogRelationships();
-
 
 
         /*if ($request->hasFile('image')) {
