@@ -35,6 +35,14 @@
 @section('title', config('app.name') . ' | ' . "Pedigree")
 
 @section('content')
+<div>Number of Generations</div>
+<div>
+<a href="/dogs/{{ $id }}/pedigree/2">2</a>
+<a href="/dogs/{{ $id }}/pedigree/3">3</a>
+<a href="/dogs/{{ $id }}/pedigree/4">4</a>
+<a href="/dogs/{{ $id }}/pedigree/5">5</a>
+<a href="/dogs/{{ $id }}/pedigree/6">6</a>
+</div>
     <div class="row">
         <div class="col">
             <div class="card">
@@ -47,4 +55,7 @@
             </div><!--card-->
         </div><!--col-->
     </div><!--row-->
+    <div class="mt-3">
+    <a href="/dogs/{{ $id }}" class="btn btn-success">Back<a>
+</div>
 @endsection

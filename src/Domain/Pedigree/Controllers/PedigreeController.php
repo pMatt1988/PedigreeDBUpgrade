@@ -20,7 +20,8 @@ class PedigreeController extends Controller
     {
         $pedigree = new Pedigree();
         $output = $pedigree->generatePed($id, $nGens);
-        return view('dog.pedigree.show', compact('output'));
+        
+        return view('dog.pedigree.show', compact('output', 'id'));
     }
 
     public function showtestmate(Request $request) {
